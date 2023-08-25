@@ -1,19 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_qr/screens/InformacionEquipos.dart';
-import 'package:proyecto_qr/screens/escoger.dart';
-import 'package:proyecto_qr/screens/informacion_equipos.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:proyecto_qr/screens/reporte_instalacion.dart';
+import 'package:proyecto_qr/screens/lector_qr.dart';
+import 'package:proyecto_qr/screens/sesion.dart';
+import 'lector_manual.dart';
 
-class menuEquipos extends StatefulWidget {
-  const menuEquipos({super.key});
+class eleccion extends StatefulWidget {
+  const eleccion({super.key});
 
   @override
-  State<menuEquipos> createState() => _menuEquipos();
+  State<eleccion> createState() => _eleccion();
 }
 
-class _menuEquipos extends State<menuEquipos> {
+class _eleccion extends State<eleccion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,11 +32,13 @@ class _menuEquipos extends State<menuEquipos> {
           child: Column(
             children: [
               Text(
-                'EQUIPOS',
-                style: TextStyle(fontSize: 40),
+                '¿QUE DESEAS HACER?',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
               ),
               SizedBox(
-                height: 70,
+                height: 100,
               ),
 
 ////////////////////////////boton informacion////////////////////////////////////////////////////
@@ -48,45 +48,8 @@ class _menuEquipos extends State<menuEquipos> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => informacionEquipos()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
-                    'INFORMACIÓN',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-/////////////////Termino de boton informacion////////////////////////////////////////////
-              ///
-/////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
-                height: 25,
-              ),
-
-////////////////////termino Espaciado entre botones////////////////////////////////////
-              ///
-///////////////boton reporte de instalacion//////////////////////////////////////////////
-
-              Container(
-                width: 200,
-                height: 60,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => PDFViewerFromAPI(),
-                      ),
+                      MaterialPageRoute(builder: (context) => QRScannerPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -97,16 +60,17 @@ class _menuEquipos extends State<menuEquipos> {
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(color: Colors.black, width: 5))),
                   child: Text(
-                    'REPORTE DE INSTALACIÓN',
+                    'LEER QR',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
-/////////////////////////Termino boton Reporte de instalacion/////////////////////////
+/////////////////Termino de boton informacion////////////////////////////////////////////
+              ///
               ////////////////espaciado entre botones///////////////////////////////////////////////////
               SizedBox(
-                height: 25,
+                height: 65,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
@@ -117,7 +81,10 @@ class _menuEquipos extends State<menuEquipos> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InputPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       padding:
@@ -127,7 +94,7 @@ class _menuEquipos extends State<menuEquipos> {
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(color: Colors.black, width: 5))),
                   child: Text(
-                    'HISTORIAL DE SERVICIOS',
+                    'INGRESAR ARTICULO MANUALMENTE',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
                   ),
@@ -137,7 +104,7 @@ class _menuEquipos extends State<menuEquipos> {
 ////////////////////////////Termino boton Reporte de instalacion/////////////////////////
               ////////////////espaciado entre botones///////////////////////////////////////////////////
               SizedBox(
-                height: 50,
+                height: 80,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
@@ -148,8 +115,11 @@ class _menuEquipos extends State<menuEquipos> {
                 height: 90,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => eleccion()));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       padding:
@@ -159,7 +129,7 @@ class _menuEquipos extends State<menuEquipos> {
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(color: Colors.black, width: 5))),
                   child: Text(
-                    'SCANEAR',
+                    'CERRAR SESIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
@@ -200,23 +170,5 @@ class _menuEquipos extends State<menuEquipos> {
         )
         ///////////////// fin de configuracion Fotter/////////////////////////////////////////////////////
         );
-  }
-}
-
-class PdfViewerScreen extends StatelessWidget {
-  final String pdfPath;
-
-  PdfViewerScreen({required this.pdfPath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Visor de PDF'),
-      ),
-      body: PDFView(
-        filePath: pdfPath,
-      ),
-    );
   }
 }

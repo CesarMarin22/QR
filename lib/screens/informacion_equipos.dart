@@ -1,94 +1,165 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:proyecto_qr/screens/menu_equipos.dart';
 
-// class informacionEquipos extends StatefulWidget {
-//   const informacionEquipos({super.key});
+class InformacionEquipos {
+  String serie = 'MC-12345';
+  String marca = 'STILL';
+  String modelo = 'RJ45';
+  String tipo = 'ELECTRICO';
+  String voltaje = '48V';
+  String capacidad = '2000 KG';
+  String alturaEstiba = '500 CM';
+  String aditamento = 'HORQUILLAS AJUSTABLES';
+  String fechaImportacion = '15/07/2023';
+  String comentarios = 'EXCELENTE ESTADO, RECIÉN MANTENIDO';
+}
 
-//   @override
-//   State<informacionEquipos> createState() => _informacionEquiposState();
-// }
+class informacionEquipos extends StatefulWidget {
+  @override
+  _informacionEquipos createState() => _informacionEquipos();
+}
 
-// class _informacionEquiposState extends State<informacionEquipos> {
-//   final Map<String, String> valuesFromServiceLayer = {
-//     'SERIE': 'Valor de Serie',
-//     'MARCA': 'Valor de Marca',
-//     'MODELO': 'Valor de Modelo',
-//     'TIPO': 'Valor de Tipo',
-//     'VOLTAJE': 'Valor de Voltaje',
-//     'CAPACIDAD': 'Valor de Capacidad',
-//     'ALTURA DE ESTIBA': 'Valor de Altura de Estiba',
-//     'ADITAMENTO': 'Valor de Aditamento',
-//     'FECHA DE IMPORTACIÓN': 'Valor de Fecha de Importación',
-//     'COMENTARIOS': 'Valor de Comentarios',
-//   };
+class _informacionEquipos extends State<informacionEquipos> {
+  final _formKey = GlobalKey<FormState>();
+  InformacionEquipos _infoEquipos = InformacionEquipos();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Text Boxes'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: EdgeInsets.all(15),
-//           child: Column(
-//             children: <Widget>[
-//               MyTextBox(label: 'SERIE', initialValue: valuesFromServiceLayer['SERIE']),
-//               MyTextBox(label: 'MARCA', initialValue: valuesFromServiceLayer['MARCA']),
-//               MyTextBox(label: 'MODELO', initialValue: valuesFromServiceLayer['MODELO']),
-//               MyTextBox(label: 'TIPO', initialValue: valuesFromServiceLayer['TIPO']),
-//               MyTextBox(label: 'VOLTAJE', initialValue: valuesFromServiceLayer['VOLTAJE']),
-//               MyTextBox(label: 'CAPACIDAD', initialValue: valuesFromServiceLayer['CAPACIDAD']),
-//               MyTextBox(label: 'ALTURA DE ESTIBA', initialValue: valuesFromServiceLayer['ALTURA DE ESTIBA']),
-//               MyTextBox(label: 'ADITAMENTO', initialValue: valuesFromServiceLayer['ADITAMENTO']),
-//               MyTextBox(label: 'FECHA DE IMPORTACIÓN', initialValue: valuesFromServiceLayer['FECHA DE IMPORTACIÓN']),
-//               MyTextBox(label: 'COMENTARIOS', initialValue: valuesFromServiceLayer['COMENTARIOS']),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(65),
+          child: AppBar(
+            backgroundColor: Color.fromARGB(255, 243, 138, 0),
+            title: Center(
+              child: Image.asset(
+                'assets/logo_ipl_negro.png',
+                width: 63,
+                height: 63,
+              ),
+            ),
+          ),
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: ListView(
+              children: [
+                Text(
+                  'INFORMACIÓN DE EQUIPOS',
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                _buildTextField('Serie', _infoEquipos.serie),
+                SizedBox(height: 12),
+                _buildTextField('Marca', _infoEquipos.marca),
+                SizedBox(height: 12),
+                _buildTextField('Modelo', _infoEquipos.modelo),
+                SizedBox(height: 12),
+                _buildTextField('Tipo', _infoEquipos.tipo),
+                SizedBox(height: 12),
+                _buildTextField('Voltaje', _infoEquipos.voltaje),
+                SizedBox(height: 12),
+                _buildTextField('Capacidad', _infoEquipos.capacidad),
+                SizedBox(height: 12),
+                _buildTextField('Altura de Estiba', _infoEquipos.alturaEstiba),
+                SizedBox(height: 12),
+                _buildTextField('Aditamento', _infoEquipos.aditamento),
+                SizedBox(height: 12),
+                _buildTextField(
+                    'Fecha de Importación', _infoEquipos.fechaImportacion),
+                SizedBox(height: 12),
+                _buildTextField('Comentarios', _infoEquipos.comentarios),
+                SizedBox(height: 40),
+                Container(
+                  width: 100,
+                  height: 90,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => menuEquipos()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        backgroundColor: Color.fromARGB(255, 250, 2, 2),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(color: Colors.black, width: 5))),
+                    child: Text(
+                      'REGRESAR',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          color: Color.fromARGB(255, 29, 29, 27),
+          shape: CircularNotchedRectangle(),
+          child: Container(
+            height: 50,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Copyright ©2023, Todos los Derechos Reservados.',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.0,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                  Text(
+                    'Powered by IPL',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12.0,
+                        color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
 
-// class MyTextBox extends StatelessWidget {
-//   final String label;
-//   final String initialValue;
-
-//   const MyTextBox({required this.label, required this.initialValue});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.all(15),
-//       child: TextField(
-//         readOnly: true,
-//         controller: TextEditingController(text: initialValue), // Establecer el valor inicial del TextField
-//         decoration: InputDecoration(
-//           border: OutlineInputBorder(),
-//           labelText: label,
-//         ),
-//       ),
-//     );
-//     );
-//   }
-// }
-
-// class textBoxEquipos extends StatelessWidget {
-//   final String label;
-
-//   const textBoxEquipos({required this.label});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.all(15),
-//       child: TextField(
-//         readOnly: true,
-//         decoration: InputDecoration(
-//           border: OutlineInputBorder(),
-//           labelText: label,
-//         ),
-//       ),
-//     );
-//   }
-// }
+  Widget _buildTextField(String label, String value) {
+    return TextFormField(
+      initialValue: value,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Por favor ingresa $label';
+        }
+        return null;
+      },
+      onChanged: (newValue) {
+        setState(() {
+          switch (label) {
+            case 'Serie':
+              _infoEquipos.serie = newValue;
+              break;
+            case 'Marca':
+              _infoEquipos.marca = newValue;
+              break;
+            // ... Repetir para los demás campos
+          }
+        });
+      },
+    );
+  }
+}
