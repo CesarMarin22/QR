@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
@@ -7,15 +6,17 @@ import 'dart:io';
 import 'package:rive/rive.dart';
 
 class PDFViewerFromAPI extends StatefulWidget {
+  const PDFViewerFromAPI({super.key});
+
   @override
   _PDFViewerFromAPIState createState() => _PDFViewerFromAPIState();
 }
 
 class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
-  String _pdfUrl =
+  final String _pdfUrl =
       'https://www.ibm.com/downloads/cas/GJ5QVQ7X'; // URL de la API que devuelve el PDF
   String? _localFilePath;
-  bool _isLoading = true;
+  final bool _isLoading = true;
 
   @override
   void initState() {
@@ -45,9 +46,9 @@ class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65),
+        preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: Color.fromARGB(255, 243, 138, 0),
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
               'assets/logo_ipl_negro.png',
@@ -61,17 +62,20 @@ class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
           ? PDFView(
               filePath: _localFilePath!,
             )
-          : Center(
-              child: RiveAnimation.asset(
-                'assets/cargando_imagen.riv',
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
+          : Container(
+              color: Colors.white,
+              child: Center(
+                child: RiveAnimation.asset(
+                  'assets/cargando_imagen.riv',
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                ),
               ),
             ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: const BottomAppBar(
         color: Color.fromARGB(255, 29, 29, 27),
         shape: CircularNotchedRectangle(),
-        child: Container(
+        child: SizedBox(
           height: 50,
           child: Center(
             child: Column(
@@ -102,7 +106,7 @@ class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
         },
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
-        child: Icon(Icons.arrow_back),
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }

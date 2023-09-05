@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_qr/screens/escoger.dart';
-import 'package:proyecto_qr/screens/informacion_equipos.dart';
-import 'package:proyecto_qr/screens/lector_manual.dart';
-import 'package:proyecto_qr/screens/menu_baterias.dart';
-import 'package:proyecto_qr/screens/menu_cargadores.dart';
-import 'package:proyecto_qr/screens/menu_equipos.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:proyecto_qr/screens/lector_qr.dart';
-import 'package:proyecto_qr/screens/prueba_sl.dart';
-import 'package:proyecto_qr/screens/reporte_instalacion.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_qr/models/user.dart';
+import 'package:proyecto_qr/providers/auth_provider.dart';
+import 'package:proyecto_qr/screens/prueba.dart';
 import 'package:proyecto_qr/screens/sesion.dart';
+import 'package:proyecto_qr/providers/serial_number.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SerialNumberModel('')),
+        // Otros providers si los tienes
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,6 +25,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: eleccion());
+    return ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+      child: MaterialApp(
+        title: "Proyecto QR",
+        home: LoginScreen(),
+      ),
+    );
   }
 }

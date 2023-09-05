@@ -1,6 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_qr/screens/InformacionEquipos.dart';
 
 class menuCargadores extends StatefulWidget {
   const menuCargadores({super.key});
@@ -14,7 +12,7 @@ class _menuCargadoresState extends State<menuCargadores> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 243, 138, 0),
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
               'assets/logo_ipl_negro.png',
@@ -29,16 +27,16 @@ class _menuCargadoresState extends State<menuCargadores> {
           padding: const EdgeInsets.only(top: 30),
           child: Column(
             children: [
-              Text(
+              const Text(
                 'CARGADORES',
                 style: TextStyle(fontSize: 40),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
 
 ////////////////////////////boton informacion////////////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
@@ -47,12 +45,12 @@ class _menuCargadoresState extends State<menuCargadores> {
                   },
                   style: ElevatedButton.styleFrom(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side: const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'INFORMACIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -62,14 +60,14 @@ class _menuCargadoresState extends State<menuCargadores> {
 /////////////////Termino de boton informacion////////////////////////////////////////////
               ///
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 65,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 //////////////////boton historia de servicios//////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
@@ -78,12 +76,12 @@ class _menuCargadoresState extends State<menuCargadores> {
                   },
                   style: ElevatedButton.styleFrom(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side: const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'HISTORIAL DE SERVICIOS',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -93,14 +91,14 @@ class _menuCargadoresState extends State<menuCargadores> {
 ///////////////////////fin boton historial de servicios/////////////////////////////
 ////////////////////////////Termino boton Reporte de instalacion/////////////////////////
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 /////////////////////boton REGRESAR //////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 90,
                 child: ElevatedButton(
@@ -109,12 +107,12 @@ class _menuCargadoresState extends State<menuCargadores> {
                   },
                   style: ElevatedButton.styleFrom(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 250, 2, 2),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 250, 2, 2),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side: const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'REGRESAR',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
@@ -126,10 +124,10 @@ class _menuCargadoresState extends State<menuCargadores> {
           ),
         )),
 /////////////////configuracion Fotter/////////////////////////////////////////////////////
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: const BottomAppBar(
           color: Color.fromARGB(255, 29, 29, 27),
           shape: CircularNotchedRectangle(),
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Center(
               child: Column(

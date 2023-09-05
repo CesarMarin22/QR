@@ -1,49 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<MyApp> {
+class prueba extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter TextField Example'),
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: FutureBuilder(
+            future: fetchData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                // Mostrar los datos de la respuesta aquí
+                return Text('API Response: ${snapshot.data}');
+              }
+            },
+          ),
         ),
-        body: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'User Name',
-                      hintText: 'Enter Your Name',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter Password',
-                    ),
-                  ),
-                ),
-              ],
-            )));
+      ),
+    );
+  }
+
+  Future<String> fetchData() async {
+    final username = 'manager';
+    final password = 'IPL_Sir17';
+    final basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    final response = await http.get(
+      Uri.parse('http://192.168.0.172:5000'),
+      headers: {'authorization': basicAuth},
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
 }

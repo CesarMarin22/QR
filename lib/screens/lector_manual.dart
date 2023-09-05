@@ -4,6 +4,8 @@ import 'package:proyecto_qr/screens/menu_cargadores.dart';
 import 'package:proyecto_qr/screens/menu_equipos.dart';
 
 class InputPage extends StatefulWidget {
+  const InputPage({super.key});
+
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -24,7 +26,7 @@ class _InputPageState extends State<InputPage> {
   void navigateTomenuEquipos() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => menuEquipos()),
+      MaterialPageRoute(builder: (context) => const menuEquipos()),
     ).then((_) {
       articleController.clear();
       serialNumberController.clear();
@@ -38,7 +40,7 @@ class _InputPageState extends State<InputPage> {
   void navigateTomenuBaterias() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => menuBaterias()),
+      MaterialPageRoute(builder: (context) => const menuBaterias()),
     ).then((_) {
       articleController.clear();
       serialNumberController.clear();
@@ -52,7 +54,7 @@ class _InputPageState extends State<InputPage> {
   void navigateTomenuCargadores() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => menuCargadores()),
+      MaterialPageRoute(builder: (context) => const menuCargadores()),
     ).then((_) {
       articleController.clear();
       serialNumberController.clear();
@@ -74,7 +76,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 243, 138, 0),
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
               'assets/logo_ipl_negro.png',
@@ -118,11 +120,11 @@ class _InputPageState extends State<InputPage> {
                       }
                     });
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Número de Serie',
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: botonHabilitado
                       ? () {
@@ -225,16 +227,16 @@ class _InputPageState extends State<InputPage> {
                           }
                         }
                       : null,
-                  child: Text('Verificar'),
+                  child: const Text('Verificar'),
                 ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: const BottomAppBar(
           color: Color.fromARGB(255, 29, 29, 27),
           shape: CircularNotchedRectangle(),
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Center(
               child: Column(

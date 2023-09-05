@@ -1,9 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_qr/screens/InformacionEquipos.dart';
 import 'package:proyecto_qr/screens/escoger.dart';
 import 'package:proyecto_qr/screens/informacion_equipos.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:proyecto_qr/screens/llamadas_servicio.dart';
 import 'package:proyecto_qr/screens/reporte_instalacion.dart';
 
 class menuEquipos extends StatefulWidget {
@@ -18,7 +17,7 @@ class _menuEquipos extends State<menuEquipos> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 243, 138, 0),
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
               'assets/logo_ipl_negro.png',
@@ -33,33 +32,32 @@ class _menuEquipos extends State<menuEquipos> {
           padding: const EdgeInsets.only(top: 30),
           child: Column(
             children: [
-              Text(
+              const Text(
                 'EQUIPOS',
                 style: TextStyle(fontSize: 40),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 70,
               ),
 
 ////////////////////////////boton informacion////////////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => informacionEquipos()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'INFORMACIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -69,7 +67,7 @@ class _menuEquipos extends State<menuEquipos> {
 /////////////////Termino de boton informacion////////////////////////////////////////////
               ///
 /////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
 
@@ -77,7 +75,7 @@ class _menuEquipos extends State<menuEquipos> {
               ///
 ///////////////boton reporte de instalacion//////////////////////////////////////////////
 
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
@@ -85,18 +83,19 @@ class _menuEquipos extends State<menuEquipos> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PDFViewerFromAPI(),
+                        builder: (context) => const PDFViewerFromAPI(),
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'REPORTE DE INSTALACIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -105,28 +104,34 @@ class _menuEquipos extends State<menuEquipos> {
               ),
 /////////////////////////Termino boton Reporte de instalacion/////////////////////////
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 //////////////////boton historia de servicios//////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const llamadaServicios(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'HISTORIAL DE SERVICIOS',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -136,29 +141,32 @@ class _menuEquipos extends State<menuEquipos> {
 ///////////////////////fin boton historial de servicios/////////////////////////////
 ////////////////////////////Termino boton Reporte de instalacion/////////////////////////
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 /////////////////////boton REGRESAR //////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 90,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => eleccion()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const eleccion()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 250, 2, 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 250, 2, 2),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'SCANEAR',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
@@ -170,10 +178,10 @@ class _menuEquipos extends State<menuEquipos> {
           ),
         )),
 /////////////////configuracion Fotter/////////////////////////////////////////////////////
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: const BottomAppBar(
           color: Color.fromARGB(255, 29, 29, 27),
           shape: CircularNotchedRectangle(),
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Center(
               child: Column(
@@ -206,13 +214,13 @@ class _menuEquipos extends State<menuEquipos> {
 class PdfViewerScreen extends StatelessWidget {
   final String pdfPath;
 
-  PdfViewerScreen({required this.pdfPath});
+  const PdfViewerScreen({super.key, required this.pdfPath});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Visor de PDF'),
+        title: const Text('Visor de PDF'),
       ),
       body: PDFView(
         filePath: pdfPath,

@@ -13,13 +13,13 @@ class SapB1ServiceTester {
 
     if (isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('¡Conexión exitosa a Service Layer!'),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('¡La conexión falló!'),
         ),
       );
@@ -50,16 +50,18 @@ class SapB1ServiceTester {
 class MyWidget extends StatelessWidget {
   final SapB1ServiceTester _tester = SapB1ServiceTester();
 
+  MyWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Service Layer Connection Tester'),
+        title: const Text('Service Layer Connection Tester'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () => _tester.testConnection(context),
-          child: Text('Test Connection to Service Layer'),
+          child: const Text('Test Connection to Service Layer'),
         ),
       ),
     );

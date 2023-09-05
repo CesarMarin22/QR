@@ -50,6 +50,10 @@ dependencies:
   pdf: ^3.10.4
   printing: ^5.11.0
   rive: ^0.11.14
+  toggle_switch: ^2.1.0
+  provider: ^6.0.5
+  jwt_decoder: ^2.0.1
+  jwt_decode: ^0.3.1
  
 
  
@@ -75,6 +79,7 @@ flutter:
      - assets/logo_ipl_negro.png
      - assets/diagrama_de _flujo_Middleware_ZKW.pdf
      - assets/1.pdf
+     - assets/cargando_imagen.riv
 
      
 

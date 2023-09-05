@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
 
-class InformacionEquipos extends StatelessWidget {
-  const InformacionEquipos({super.key});
+class Informacion_Equipos extends StatelessWidget {
+  const Informacion_Equipos({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 243, 138, 0),
+        backgroundColor: const Color.fromARGB(255, 243, 138, 0),
         title: Center(
           child: Image.asset(
             'assets/logo_ipl_negro.png',

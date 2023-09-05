@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_qr/screens/lector_qr.dart';
 import 'package:proyecto_qr/screens/sesion.dart';
@@ -16,7 +15,7 @@ class _eleccion extends State<eleccion> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 243, 138, 0),
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
               'assets/logo_ipl_negro.png',
@@ -31,18 +30,18 @@ class _eleccion extends State<eleccion> {
           padding: const EdgeInsets.only(top: 30),
           child: Column(
             children: [
-              Text(
+              const Text(
                 '¿QUE DESEAS HACER?',
                 style: TextStyle(
                   fontSize: 30,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
 
 ////////////////////////////boton informacion////////////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
@@ -53,13 +52,14 @@ class _eleccion extends State<eleccion> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'LEER QR',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -69,14 +69,14 @@ class _eleccion extends State<eleccion> {
 /////////////////Termino de boton informacion////////////////////////////////////////////
               ///
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 65,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 //////////////////boton historia de servicios//////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 60,
                 child: ElevatedButton(
@@ -87,13 +87,14 @@ class _eleccion extends State<eleccion> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 243, 138, 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'INGRESAR ARTICULO MANUALMENTE',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     textAlign: TextAlign.center,
@@ -103,14 +104,14 @@ class _eleccion extends State<eleccion> {
 ///////////////////////fin boton historial de servicios/////////////////////////////
 ////////////////////////////Termino boton Reporte de instalacion/////////////////////////
               ////////////////espaciado entre botones///////////////////////////////////////////////////
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
 
 ////////////////////termino Espaciado entre botones////////////////////////////////////
               ///
 /////////////////////boton REGRESAR //////////////////////////////////////////////
-              Container(
+              SizedBox(
                 width: 200,
                 height: 90,
                 child: ElevatedButton(
@@ -122,13 +123,14 @@ class _eleccion extends State<eleccion> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      backgroundColor: Color.fromARGB(255, 250, 2, 2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 250, 2, 2),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(color: Colors.black, width: 5))),
-                  child: Text(
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
                     'CERRAR SESIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
@@ -140,10 +142,10 @@ class _eleccion extends State<eleccion> {
           ),
         )),
 /////////////////configuracion Fotter/////////////////////////////////////////////////////
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: const BottomAppBar(
           color: Color.fromARGB(255, 29, 29, 27),
           shape: CircularNotchedRectangle(),
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Center(
               child: Column(

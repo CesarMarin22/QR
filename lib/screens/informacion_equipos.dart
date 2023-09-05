@@ -1,111 +1,210 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_qr/providers/serial_number.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:proyecto_qr/screens/escoger.dart';
 import 'package:proyecto_qr/screens/menu_equipos.dart';
 
-class InformacionEquipos {
-  String serie = 'MC-12345';
-  String marca = 'STILL';
-  String modelo = 'RJ45';
-  String tipo = 'ELECTRICO';
-  String voltaje = '48V';
-  String capacidad = '2000 KG';
-  String alturaEstiba = '500 CM';
-  String aditamento = 'HORQUILLAS AJUSTABLES';
-  String fechaImportacion = '15/07/2023';
-  String comentarios = 'EXCELENTE ESTADO, RECIÉN MANTENIDO';
-}
-
-class informacionEquipos extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _informacionEquipos createState() => _informacionEquipos();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _informacionEquipos extends State<informacionEquipos> {
-  final _formKey = GlobalKey<FormState>();
-  InformacionEquipos _infoEquipos = InformacionEquipos();
+class _HomePageState extends State<HomePage> {
+  TextEditingController _serieController = TextEditingController();
+  TextEditingController _marcaController = TextEditingController();
+  TextEditingController _modeloController = TextEditingController();
+  TextEditingController _tipoController = TextEditingController();
+  TextEditingController _voltajeController = TextEditingController();
+  TextEditingController _capacidadController = TextEditingController();
+  TextEditingController _alturaEstibaController = TextEditingController();
+  TextEditingController _aditamentoController = TextEditingController();
+  TextEditingController _fechaImportacionController = TextEditingController();
+  TextEditingController _comentariosController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final numSerie =
+        Provider.of<SerialNumberModel>(context, listen: false).serialNumber;
+    if (numSerie != null && numSerie.isNotEmpty) {
+      fetchDataFromAPI(numSerie);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(65),
-          child: AppBar(
-            backgroundColor: Color.fromARGB(255, 243, 138, 0),
-            title: Center(
-              child: Image.asset(
-                'assets/logo_ipl_negro.png',
-                width: 63,
-                height: 63,
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 243, 138, 0),
+          title: Center(
+            child: Image.asset(
+              'assets/logo_ipl_negro.png',
+              width: 70,
+              height: 70,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          // Agregamos SingleChildScrollView aquí
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Column(
+                children: [
+                  const Text(
+                    'INFORMACIÓN DE EQUIPO',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  TextField(
+                    controller: _serieController,
+                    decoration: InputDecoration(
+                      labelText: 'Serie',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _marcaController,
+                    decoration: InputDecoration(
+                      labelText: 'Marca',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _modeloController,
+                    decoration: InputDecoration(
+                      labelText: 'Modelo',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _tipoController,
+                    decoration: InputDecoration(
+                      labelText: 'Tipo',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _voltajeController,
+                    decoration: InputDecoration(
+                      labelText: 'Voltaje',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _capacidadController,
+                    decoration: InputDecoration(
+                      labelText: 'Capacidad',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _alturaEstibaController,
+                    decoration: InputDecoration(
+                      labelText: 'Altura de Estiba',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _aditamentoController,
+                    decoration: InputDecoration(
+                      labelText: 'Aditamento',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _fechaImportacionController,
+                    decoration: InputDecoration(
+                      labelText: 'Fecha de Importación',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0), // Espaciado entre TextField
+                  TextField(
+                    controller: _comentariosController,
+                    decoration: InputDecoration(
+                      labelText: 'Comentarios',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    readOnly: true,
+                  ),
+                  SizedBox(height: 18.0),
+                  SizedBox(
+                    width: 200,
+                    height: 90,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const menuEquipos()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          backgroundColor: const Color.fromARGB(255, 250, 2, 2),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 5))),
+                      child: const Text(
+                        'REGRESAR',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  // Espaciado entre TextField
+                ],
               ),
             ),
           ),
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: ListView(
-              children: [
-                Text(
-                  'INFORMACIÓN DE EQUIPOS',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                _buildTextField('Serie', _infoEquipos.serie),
-                SizedBox(height: 12),
-                _buildTextField('Marca', _infoEquipos.marca),
-                SizedBox(height: 12),
-                _buildTextField('Modelo', _infoEquipos.modelo),
-                SizedBox(height: 12),
-                _buildTextField('Tipo', _infoEquipos.tipo),
-                SizedBox(height: 12),
-                _buildTextField('Voltaje', _infoEquipos.voltaje),
-                SizedBox(height: 12),
-                _buildTextField('Capacidad', _infoEquipos.capacidad),
-                SizedBox(height: 12),
-                _buildTextField('Altura de Estiba', _infoEquipos.alturaEstiba),
-                SizedBox(height: 12),
-                _buildTextField('Aditamento', _infoEquipos.aditamento),
-                SizedBox(height: 12),
-                _buildTextField(
-                    'Fecha de Importación', _infoEquipos.fechaImportacion),
-                SizedBox(height: 12),
-                _buildTextField('Comentarios', _infoEquipos.comentarios),
-                SizedBox(height: 40),
-                Container(
-                  width: 100,
-                  height: 90,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => menuEquipos()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        backgroundColor: Color.fromARGB(255, 250, 2, 2),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(color: Colors.black, width: 5))),
-                    child: Text(
-                      'REGRESAR',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: const BottomAppBar(
           color: Color.fromARGB(255, 29, 29, 27),
           shape: CircularNotchedRectangle(),
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Center(
               child: Column(
@@ -132,34 +231,36 @@ class _informacionEquipos extends State<informacionEquipos> {
         ));
   }
 
-  Widget _buildTextField(String label, String value) {
-    return TextFormField(
-      initialValue: value,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Por favor ingresa $label';
-        }
-        return null;
-      },
-      onChanged: (newValue) {
+  Future<void> fetchDataFromAPI(String numSerie) async {
+    final apiUrl = Uri.parse(
+        'http://192.168.1.160:5000/equipos/$numSerie'); // Reemplaza con la URL y el endpoint correctos
+
+    try {
+      final response = await http.get(apiUrl);
+
+      if (response.statusCode == 200) {
+        final decodedResponse = json.decode(response.body);
+
         setState(() {
-          switch (label) {
-            case 'Serie':
-              _infoEquipos.serie = newValue;
-              break;
-            case 'Marca':
-              _infoEquipos.marca = newValue;
-              break;
-            // ... Repetir para los demás campos
-          }
+          _serieController.text = decodedResponse['SERIE'] ?? '';
+          _marcaController.text = decodedResponse['MARCA'] ?? '';
+          _modeloController.text = decodedResponse['MODELO'] ?? '';
+          _tipoController.text = decodedResponse['TIPO'] ?? '';
+          _voltajeController.text =
+              (decodedResponse['VOLTAJE'] ?? 0).toString();
+          _capacidadController.text = decodedResponse['CAPACIDAD'] ?? '';
+          _alturaEstibaController.text =
+              decodedResponse['ALTURA_DE_ESTIBA'] ?? '';
+          _aditamentoController.text = decodedResponse['ADITAMENTO'] ?? '';
+          _fechaImportacionController.text =
+              decodedResponse['FECHA_DE_IMPORTACION'] ?? '';
+          _comentariosController.text = decodedResponse['COMENTARIOS'] ?? '';
         });
-      },
-    );
+      } else {
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 }
