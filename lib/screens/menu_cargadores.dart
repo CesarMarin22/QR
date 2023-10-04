@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_qr/screens/escoger.dart';
+import 'package:proyecto_qr/screens/informacion_cargadores%20.dart';
+import 'package:proyecto_qr/screens/llamadas_servicio_cargadores.dart';
 
 class menuCargadores extends StatefulWidget {
   const menuCargadores({super.key});
@@ -12,6 +15,7 @@ class _menuCargadoresState extends State<menuCargadores> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
@@ -41,15 +45,19 @@ class _menuCargadoresState extends State<menuCargadores> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => informacionCargadores()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
                     'INFORMACIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.black),
@@ -72,15 +80,22 @@ class _menuCargadoresState extends State<menuCargadores> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const LlamadaServiciosCargadores(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
                     'HISTORIAL DE SERVICIOS',
                     style: TextStyle(fontSize: 20, color: Colors.black),
@@ -103,17 +118,21 @@ class _menuCargadoresState extends State<menuCargadores> {
                 height: 90,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const eleccion()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 250, 2, 2),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
-                    'REGRESAR',
+                    'ESCANEAR',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),

@@ -16,7 +16,6 @@ class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
   final String _pdfUrl =
       'https://www.ibm.com/downloads/cas/GJ5QVQ7X'; // URL de la API que devuelve el PDF
   String? _localFilePath;
-  final bool _isLoading = true;
 
   @override
   void initState() {
@@ -48,6 +47,7 @@ class _PDFViewerFromAPIState extends State<PDFViewerFromAPI> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(

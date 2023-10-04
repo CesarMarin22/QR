@@ -15,6 +15,7 @@ class _eleccion extends State<eleccion> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
@@ -83,7 +84,8 @@ class _eleccion extends State<eleccion> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => InputPage()),
+                      MaterialPageRoute(
+                          builder: (context) => ManualInputPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

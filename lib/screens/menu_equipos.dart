@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_qr/screens/escoger.dart';
 import 'package:proyecto_qr/screens/informacion_equipos.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:proyecto_qr/screens/llamadas_servicio.dart';
+import 'package:proyecto_qr/screens/llamadas_servicio_equipos.dart';
 import 'package:proyecto_qr/screens/reporte_instalacion.dart';
 
 class menuEquipos extends StatefulWidget {
@@ -17,6 +17,7 @@ class _menuEquipos extends State<menuEquipos> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
@@ -46,8 +47,10 @@ class _menuEquipos extends State<menuEquipos> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => informacionEquipos()));
                   },
                   style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
@@ -119,7 +122,7 @@ class _menuEquipos extends State<menuEquipos> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const llamadaServicios(),
+                        builder: (context) => const LlamadaServiciosEquipos(),
                       ),
                     );
                   },

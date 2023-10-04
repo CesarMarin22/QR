@@ -1,81 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:proyecto_qr/providers/serial_number.dart';
+import 'package:proyecto_qr/screens/escoger.dart';
+import 'dart:convert';
 import 'package:proyecto_qr/screens/menu_baterias.dart';
 import 'package:proyecto_qr/screens/menu_cargadores.dart';
 import 'package:proyecto_qr/screens/menu_equipos.dart';
 
-class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+class ManualInputPage extends StatefulWidget {
+  const ManualInputPage({Key? key}) : super(key: key);
 
   @override
-  _InputPageState createState() => _InputPageState();
+  _ManualInputPageState createState() => _ManualInputPageState();
 }
 
-class _InputPageState extends State<InputPage> {
-  final TextEditingController articleController = TextEditingController();
+class _ManualInputPageState extends State<ManualInputPage> {
   final TextEditingController serialNumberController = TextEditingController();
-  String errorTextArticle = '';
-  bool botonHabilitado = false;
-
-  @override
-  void dispose() {
-    articleController.dispose();
-    serialNumberController.dispose();
-    super.dispose();
-  }
-
-  void navigateTomenuEquipos() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const menuEquipos()),
-    ).then((_) {
-      articleController.clear();
-      serialNumberController.clear();
-      setState(() {
-        errorTextArticle = '';
-        botonHabilitado = false;
-      });
-    });
-  }
-
-  void navigateTomenuBaterias() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const menuBaterias()),
-    ).then((_) {
-      articleController.clear();
-      serialNumberController.clear();
-      setState(() {
-        errorTextArticle = '';
-        botonHabilitado = false;
-      });
-    });
-  }
-
-  void navigateTomenuCargadores() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const menuCargadores()),
-    ).then((_) {
-      articleController.clear();
-      serialNumberController.clear();
-      setState(() {
-        errorTextArticle = '';
-        botonHabilitado = false;
-      });
-    });
-  }
-
-  void mostrarErrorArticulo() {
-    setState(() {
-      errorTextArticle = 'Articulo no valido';
-      botonHabilitado = false;
-    });
-  }
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
@@ -86,151 +34,97 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Column(
-              children: [
-                TextField(
-                  controller: articleController,
-                  onChanged: (value) {
-                    setState(() {
-                      errorTextArticle = '';
-                      if (value.isNotEmpty &&
-                          serialNumberController.text.isNotEmpty) {
-                        botonHabilitado = true;
-                      } else {
-                        botonHabilitado = false;
-                      }
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Artículo',
-                    errorText: errorTextArticle,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 0),
+                child: Text(
+                  'INTRODUCIR NUMERO DE SERIE',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-                TextField(
+              ),
+              const SizedBox(
+                height: 70,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
                   controller: serialNumberController,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value.isNotEmpty &&
-                          articleController.text.isNotEmpty) {
-                        botonHabilitado = true;
-                      } else {
-                        botonHabilitado = false;
-                      }
-                    });
-                  },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Número de Serie',
+                    labelStyle:
+                        TextStyle(color: Color.fromARGB(255, 243, 138, 0)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 29, 29, 27),
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 29, 29, 27),
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: botonHabilitado
-                      ? () {
-                          String article = articleController.text;
-
-                          errorTextArticle = '';
-                          switch (article.substring(0, 2)) {
-                            case 'ME':
-                              // Mostrar pantalla A
-                              navigateTomenuEquipos();
-                              break;
-                            case 'MC':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'MH':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'SM':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'VE':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'PE':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'CE':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'TE':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'RE':
-                              navigateTomenuEquipos();
-                              break;
-                            case 'BP':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'BL':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C1':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C2':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C3':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C4':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C7':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C8':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'C9':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S1':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S2':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S3':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S4':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S7':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S8':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'S9':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'BF':
-                              navigateTomenuBaterias();
-                              break;
-                            case 'PP':
-                              navigateTomenuCargadores();
-                              break;
-                            case 'PL':
-                              navigateTomenuCargadores();
-                              break;
-                            case 'PF':
-                              navigateTomenuCargadores();
-                              break;
-                            // Agrega más casos según tus necesidades
-                            default:
-                              mostrarErrorArticulo();
-                              break;
-                          }
-                        }
-                      : null,
-                  child: const Text('Verificar'),
+              ),
+              SizedBox(height: 35),
+              SizedBox(
+                width: 200,
+                height: 90,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final numeroSerie = serialNumberController.text;
+                    Provider.of<SerialNumberModel>(context, listen: false)
+                        .setSerialNumber(numeroSerie);
+                    await _fetchDataFromAPI(context, numeroSerie);
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 250, 2, 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: Text('BUSCAR'),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              SizedBox(
+                width: 200,
+                height: 90,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const eleccion()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      backgroundColor: const Color.fromARGB(255, 250, 2, 2),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
+                  child: const Text(
+                    'SCANEAR',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: const BottomAppBar(
@@ -261,5 +155,56 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
         ));
+  }
+
+  Future<void> _fetchDataFromAPI(BuildContext context, String numSerie) async {
+    try {
+      final endpoints = ['equipos', 'baterias', 'cargadores'];
+
+      String grupoEncontrado = '';
+
+      for (var endpoint in endpoints) {
+        final response = await http.get(
+          Uri.parse('http://192.168.1.160:5000/$endpoint/$numSerie'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          final responseData = utf8.decode(response.bodyBytes);
+          final decodedResponse = json.decode(responseData);
+          if (decodedResponse != null && decodedResponse["SERIE"] == numSerie) {
+            grupoEncontrado = decodedResponse["GRUPO"];
+          }
+          if (grupoEncontrado.isNotEmpty) {
+            break;
+          }
+        }
+      }
+
+      if (grupoEncontrado.isNotEmpty) {
+        if (grupoEncontrado == 'CARGADORES') {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => menuCargadores()));
+        } else if (grupoEncontrado == 'MONTACARGAS') {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => menuEquipos()));
+        } else if (grupoEncontrado == 'BATERIAS') {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => menuBaterias()));
+        }
+      } else {
+        print('Número de serie no encontrado');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    serialNumberController.dispose();
+    super.dispose();
   }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_qr/screens/escoger.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_qr/models/user.dart';
 import 'package:proyecto_qr/providers/auth_provider.dart';
-import 'package:proyecto_qr/screens/prueba.dart';
+import 'package:proyecto_qr/screens/escoger.dart';
 import 'package:proyecto_qr/screens/sesion.dart';
 import 'package:proyecto_qr/providers/serial_number.dart';
 

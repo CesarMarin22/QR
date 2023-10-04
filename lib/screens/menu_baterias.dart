@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_qr/screens/escoger.dart';
+import 'package:proyecto_qr/screens/informacion_baterias.dart';
+import 'package:proyecto_qr/screens/llamadas_servicio_baterias.dart';
 
 class menuBaterias extends StatefulWidget {
   const menuBaterias({super.key});
@@ -12,6 +15,7 @@ class _menuBateriasState extends State<menuBaterias> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 243, 138, 0),
           title: Center(
             child: Image.asset(
@@ -41,15 +45,19 @@ class _menuBateriasState extends State<menuBaterias> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => informacionBaterias()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
                     'INFORMACIÓN',
                     style: TextStyle(fontSize: 20, color: Colors.black),
@@ -72,15 +80,21 @@ class _menuBateriasState extends State<menuBaterias> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LlamadaServiciosBaterias(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 243, 138, 0),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
                     'HISTORIAL DE SERVICIOS',
                     style: TextStyle(fontSize: 20, color: Colors.black),
@@ -103,17 +117,21 @@ class _menuBateriasState extends State<menuBaterias> {
                 height: 90,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Acción a realizar cuando se presiona el botón
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const eleccion()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       backgroundColor: const Color.fromARGB(255, 250, 2, 2),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                          side: const BorderSide(color: Colors.black, width: 5))),
+                          side:
+                              const BorderSide(color: Colors.black, width: 5))),
                   child: const Text(
-                    'REGRESAR',
+                    'ESCANEAR',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),

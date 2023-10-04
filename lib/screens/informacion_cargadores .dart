@@ -3,22 +3,20 @@ import 'package:provider/provider.dart';
 import 'package:proyecto_qr/providers/serial_number.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_qr/screens/menu_cargadores.dart';
 import 'package:proyecto_qr/screens/menu_equipos.dart';
 
-class informacionEquipos extends StatefulWidget {
+class informacionCargadores extends StatefulWidget {
   @override
-  _informacionEquiposState createState() => _informacionEquiposState();
+  _informacionCargadores createState() => _informacionCargadores();
 }
 
-class _informacionEquiposState extends State<informacionEquipos> {
+class _informacionCargadores extends State<informacionCargadores> {
   TextEditingController _serieController = TextEditingController();
   TextEditingController _marcaController = TextEditingController();
   TextEditingController _modeloController = TextEditingController();
-  TextEditingController _tipoController = TextEditingController();
   TextEditingController _voltajeController = TextEditingController();
-  TextEditingController _capacidadController = TextEditingController();
-  TextEditingController _alturaEstibaController = TextEditingController();
-  TextEditingController _aditamentoController = TextEditingController();
+  TextEditingController _amperajeController = TextEditingController();
   TextEditingController _fechaImportacionController = TextEditingController();
   TextEditingController _comentariosController = TextEditingController();
 
@@ -54,8 +52,8 @@ class _informacionEquiposState extends State<informacionEquipos> {
               child: Column(
                 children: [
                   const Text(
-                    'INFORMACIÓN DE EQUIPO',
-                    style: TextStyle(fontSize: 30),
+                    'INFORMACIÓN DE CARGADORES',
+                    style: TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 70,
@@ -94,17 +92,6 @@ class _informacionEquiposState extends State<informacionEquipos> {
                   ),
                   SizedBox(height: 18.0), // Espaciado entre TextField
                   TextField(
-                    controller: _tipoController,
-                    decoration: InputDecoration(
-                      labelText: 'Tipo',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    readOnly: true,
-                  ),
-                  SizedBox(height: 18.0), // Espaciado entre TextField
-                  TextField(
                     controller: _voltajeController,
                     decoration: InputDecoration(
                       labelText: 'Voltaje',
@@ -116,31 +103,9 @@ class _informacionEquiposState extends State<informacionEquipos> {
                   ),
                   SizedBox(height: 18.0), // Espaciado entre TextField
                   TextField(
-                    controller: _capacidadController,
+                    controller: _amperajeController,
                     decoration: InputDecoration(
-                      labelText: 'Capacidad',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    readOnly: true,
-                  ),
-                  SizedBox(height: 18.0), // Espaciado entre TextField
-                  TextField(
-                    controller: _alturaEstibaController,
-                    decoration: InputDecoration(
-                      labelText: 'Altura de Estiba',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    readOnly: true,
-                  ),
-                  SizedBox(height: 18.0), // Espaciado entre TextField
-                  TextField(
-                    controller: _aditamentoController,
-                    decoration: InputDecoration(
-                      labelText: 'Aditamento',
+                      labelText: 'Amperaje',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -178,7 +143,7 @@ class _informacionEquiposState extends State<informacionEquipos> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const menuEquipos()));
+                                builder: (context) => const menuCargadores()));
                       },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
@@ -233,7 +198,7 @@ class _informacionEquiposState extends State<informacionEquipos> {
 
   Future<void> fetchDataFromAPI(String numSerie) async {
     final apiUrl = Uri.parse(
-        'http://192.168.1.160:5000/equipos/$numSerie'); // Reemplaza con la URL y el endpoint correctos
+        'http://192.168.1.160:5000/cargadores/$numSerie'); // Reemplaza con la URL y el endpoint correctos
 
     try {
       final response = await http.get(apiUrl);
@@ -245,13 +210,9 @@ class _informacionEquiposState extends State<informacionEquipos> {
           _serieController.text = decodedResponse['SERIE'] ?? '';
           _marcaController.text = decodedResponse['MARCA'] ?? '';
           _modeloController.text = decodedResponse['MODELO'] ?? '';
-          _tipoController.text = decodedResponse['TIPO'] ?? '';
           _voltajeController.text =
               (decodedResponse['VOLTAJE'] ?? 0).toString();
-          _capacidadController.text = decodedResponse['CAPACIDAD'] ?? '';
-          _alturaEstibaController.text =
-              decodedResponse['ALTURA_DE_ESTIBA'] ?? '';
-          _aditamentoController.text = decodedResponse['ADITAMENTO'] ?? '';
+          _amperajeController.text = decodedResponse['AMPERAJE'] ?? '';
           _fechaImportacionController.text =
               decodedResponse['FECHA_DE_IMPORTACION'] ?? '';
           _comentariosController.text = decodedResponse['COMENTARIOS'] ?? '';
